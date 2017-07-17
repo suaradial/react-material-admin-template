@@ -1,26 +1,24 @@
-React Ui-Material Admin Template
-================================
+React Ui-Material Analytics App
 
-This is a simple responsive admin template using [React](https://facebook.github.io/react/) and [Material-UI](http://www.material-ui.com/) components.
+Main Dependencies: 
+[React](https://facebook.github.io/react/) and [Material-UI](http://www.material-ui.com/) components.
 
-This is the very first version, feel free to use for any app. Contributions are always welcome!
-
-Demo
-----
-
-You can find a demo [here](http://rafaelhz.github.io/react-material-admin-template).
-
+v1 
 
 Installation / Running
 ----------------------
 
-1. `git clone <repository-url>` this repository
-2. change into the new directory
-3. `npm install`
-4. `npm start` will run the app
+3. `yarn install`
+4. `yarn start` will run the app
 5. Visit the app at [http://localhost:3000](http://localhost:3000)
 
 
-License
--------
-MIT
+Credits
+----------------------
+This application uses Open Source components. You can find the source code of their open source projects along with license information below. We acknowledge and are grateful to these developers for their contributions to open source.
+
+Project: Material-UI https://github.com/callemall/material-ui 
+License (MIT) https://github.com/callemall/material-ui/blob/master/LICENSE
+
+Project: react-material-admin-template  https://github.com/rafaelhz/react-material-admin-template
+License (MIT) https://github.com/rafaelhz/react-material-admin-template/blob/master/README.md

@@ -11,9 +11,7 @@ import ChevronRight from 'material-ui/svg-icons/navigation/chevron-right';
 const data = {
   menus: [
     { text: 'DashBoard', icon: <Assessment/>, link: '/dashboard' },
-    { text: 'Form Page', icon: <Web/>, link: '/form' },
-    { text: 'Table Page', icon: <GridOn/>, link: '/table' },
-    { text: 'Login Page', icon: <PermIdentity/>, link: '/login' }
+    { text: 'Discharges', icon: <GridOn/>, link: '/form' },
   ],
   tablePage: {
     items: [
@@ -27,12 +25,13 @@ const data = {
       {id: 8, name: 'Product 8', price: '$750.00', category: 'Category 8'}
     ]
   },
+  
   dashBoardPage: {
     recentProducts: [
-      {id: 1, title: 'Samsung TV', text: 'Samsung 32 1080p 60Hz LED Smart HDTV.'},
-      {id: 2, title: 'Playstation 4', text: 'PlayStation 3 500 GB System'},
-      {id: 3, title: 'Apple iPhone 6', text: 'Apple iPhone 6 Plus 16GB Factory Unlocked GSM 4G '},
-      {id: 4, title: 'Apple MacBook', text: 'Apple MacBook Pro MD101LL/A 13.3-Inch Laptop'}
+      {id: 1, title: 'Harold	Swanson', text: 'Simple Pneumonia and Pleurisy with MCC.'},
+      {id: 2, title: 'Laurence	Noonan Jr', text: 'Septicemia or Severe Sepsis without MV >96 Hours without MCC'},
+      {id: 3, title: 'Thomas	Frizzell', text: 'Kidney and Urinary Tract infections without MCC'},
+      {id: 4, title: 'Lorraine	Lloyd', text: 'Chronic Obstructive Pulmonary Disease with CC'}
     ],
     monthlySales: [
       {name: 'Jan', uv: 3700},
@@ -58,9 +57,9 @@ const data = {
       {pv: 4300}
     ],
     browserUsage: [
-      {name: 'Chrome', value: 800, color: cyan600, icon: <ExpandMore/>},
-      {name: 'Firefox', value: 300, color: pink600, icon: <ChevronRight/>},
-      {name: 'Safari', value: 300, color: purple600, icon: <ExpandLess/>}
+      {name: 'Jan', value: 800, color: cyan600, icon: <ExpandMore/>},
+      {name: 'Feb', value: 300, color: pink600, icon: <ChevronRight/>},
+      {name: 'Mar', value: 300, color: purple600, icon: <ExpandLess/>}
     ]
   }
 };

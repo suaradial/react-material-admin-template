@@ -7,7 +7,7 @@ import MenuItem from 'material-ui/MenuItem';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import Menu from 'material-ui/svg-icons/navigation/menu';
 import ViewModule from 'material-ui/svg-icons/action/view-module';
-import {white} from 'material-ui/styles/colors';
+import { white } from 'material-ui/styles/colors';
 import SearchBox from './SearchBox';
 
 class Header extends React.Component {
@@ -51,9 +51,8 @@ class Header extends React.Component {
                             targetOrigin={{horizontal: 'right', vertical: 'top'}}
                             anchorOrigin={{horizontal: 'right', vertical: 'top'}}
                   >
-                    <MenuItem key={1} primaryText="Application 1"/>
-                    <MenuItem key={2} primaryText="Application 2"/>
-                    <MenuItem key={3} primaryText="Application 3"/>
+                    <MenuItem key={1} primaryText="CMS BPCI"/>
+                    <MenuItem key={2} primaryText="Tufts Medicare Preferred"/>
                   </IconMenu>
                   <IconMenu color={white}
                             iconButtonElement={
@@ -62,6 +61,7 @@ class Header extends React.Component {
                             targetOrigin={{horizontal: 'right', vertical: 'top'}}
                             anchorOrigin={{horizontal: 'right', vertical: 'top'}}
                   >
+                    <MenuItem primaryText="Profile" containerElement={<Link to="/login"/>}/>
                     <MenuItem primaryText="Sign out" containerElement={<Link to="/login"/>}/>
                   </IconMenu>
                 </div>

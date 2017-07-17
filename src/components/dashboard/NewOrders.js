@@ -9,10 +9,10 @@ const NewOrders = (props) => {
   const styles = {
     paper: {
       backgroundColor: purple500,
-      height: 150
+      height: 300
     },
     div: {
-      height: 95,
+      height: 200,
       padding: '5px 15px 0 15px'
     },
     header: {
@@ -26,7 +26,7 @@ const NewOrders = (props) => {
 
   return (
     <Paper style={styles.paper}>
-      <div style={{...styles.header}}>New Orders</div>
+      <div style={{...styles.header}}>Discharge Dispositions</div>
       <div style={styles.div}>
         <ResponsiveContainer >
           <LineChart data={props.data}>

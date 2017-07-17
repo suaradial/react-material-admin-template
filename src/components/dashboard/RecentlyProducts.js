@@ -1,6 +1,6 @@
-import React, {PropTypes} from 'react';
+import React, { PropTypes } from 'react';
 import Avatar from 'material-ui/Avatar';
-import {List, ListItem} from 'material-ui/List';
+import { List, ListItem } from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
 import Divider from 'material-ui/Divider';
 import Paper from 'material-ui/Paper';
@@ -8,8 +8,8 @@ import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
-import {grey400, cyan600, white} from 'material-ui/styles/colors';
-import {typography} from 'material-ui/styles';
+import { grey400, cyan600, white } from 'material-ui/styles/colors';
+import { typography } from 'material-ui/styles';
 import Wallpaper from 'material-ui/svg-icons/device/wallpaper';
 
 const RecentlyProducts = (props) => {
@@ -41,7 +41,7 @@ const RecentlyProducts = (props) => {
   return (
     <Paper>
       <List>
-        <Subheader style={styles.subheader}>Recent Products</Subheader>
+        <Subheader style={styles.subheader}>Inpatient Encounters</Subheader>
         {props.data.map(item =>
           <div key={item.title}>
             <ListItem

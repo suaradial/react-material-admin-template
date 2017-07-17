@@ -5,6 +5,7 @@ import {white, blue600} from 'material-ui/styles/colors';
 import MenuItem from 'material-ui/MenuItem';
 import {Link} from 'react-router';
 import Avatar from 'material-ui/Avatar';
+import FileFolder from 'material-ui/svg-icons/file/folder';
 
 const LeftDrawer = (props) => {
   let { navDrawerOpen } = props;
@@ -38,7 +39,7 @@ const LeftDrawer = (props) => {
       },
       span: {
         paddingTop: 12,
-        display: 'block',
+        display: 'inline',
         color: 'white',
         fontWeight: 300,
         textShadow: '1px 1px #444'
@@ -51,12 +52,13 @@ const LeftDrawer = (props) => {
       docked={true}
       open={navDrawerOpen}>
         <div style={styles.logo}>
-          Material Admin
+          Smart Placement
         </div>
         <div style={styles.avatar.div}>
-          <Avatar src="http://www.material-ui.com/images/uxceo-128.jpg"
+          <Avatar icon={<FileFolder />}
                   size={50}
-                  style={styles.avatar.icon}/>
+                   />
+          
           <span style={styles.avatar.span}>{props.username}</span>
         </div>
         <div>
