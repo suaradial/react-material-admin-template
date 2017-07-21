@@ -1,8 +1,17 @@
 import React, { PropTypes } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import withWidth, {LARGE, SMALL} from 'material-ui/utils/withWidth';
+import { Route, Switch } from 'react-router-dom';
+
+import requiresAuth from './AuthenticationContainer';
+
+import NotFoundPage from './NotFoundPage';
+import LoginPage from './LoginPage';
+import FormPage from './FormPage';
+import TablePage from './TablePage';
+import Dashboard from './DashboardPage';
 import Header from '../components/Header';
 import LeftDrawer from '../components/LeftDrawer';
-import withWidth, {LARGE, SMALL} from 'material-ui/utils/withWidth';
 import ThemeDefault from '../theme-default';
 import Data from '../data';
 
@@ -52,7 +61,17 @@ class App extends React.Component {
                         username="User Admin"/>
 
             <div style={styles.container}>
-              {this.props.children}
+              <Switch>
+                <Route path="/login" component={LoginPage}/>
+                {
+                  // We should abstract this second switch out into it's own componen
+                }
+                <Route exact path="/" component={requiresAuth(Dashboard)}/>
+                <Route exact path="/dashboard" component={requiresAuth(Dashboard)}/>
+                <Route path="/form" component={requiresAuth(FormPage)}/>
+                <Route path="/table" component={requiresAuth(TablePage)}/>
+                <Route path="*" component={NotFoundPage}/>
+              </Switch>
             </div>
         </div>
       </MuiThemeProvider>
@@ -65,4 +84,4 @@ App.propTypes = {
   width: PropTypes.number
 };
 
-export default withWidth()(App);
+ export default withWidth()(App);

@@ -1,4 +1,6 @@
-import React from 'react';
+import React, {Component} from 'react';
+import {  Link } from 'react-router-dom';
+
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -8,12 +10,17 @@ import {grey500, white} from 'material-ui/styles/colors';
 import PersonAdd from 'material-ui/svg-icons/social/person-add';
 import Help from 'material-ui/svg-icons/action/help';
 import TextField from 'material-ui/TextField';
-import {Link} from 'react-router';
 import ThemeDefault from '../theme-default';
 
-const LoginPage = () => {
-
-  const styles = {
+//const { from } = this.props.location.state || { from: { pathname: '/' } }
+    // const { redirectToReferrer } = this.state
+    
+    // if (redirectToReferrer) {
+    //   return (
+    //     <Redirect to={from}/>
+    //   )
+    // }
+const styles = {
     loginContainer: {
       minWidth: 320,
       maxWidth: 400,
@@ -72,7 +79,30 @@ const LoginPage = () => {
     },
   };
 
-  return (
+class LoginPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      redirectToReferrer: false,
+    };
+  }
+  
+  login () {
+    // make api call here. 
+
+    // if authenticated:
+    this.setState({ redirectToReferrer: true });
+  }
+
+  render() {
+    return(
+    // const { from } = this.props.location.state || { from: { pathname: '/' } };
+    // const { redirectToReferrer } = this.state;
+    
+    // if (redirectToReferrer) {
+    //   <Redirect to={from} />
+    // }
+    
     <MuiThemeProvider muiTheme={ThemeDefault}>
       <div>
         <div style={styles.loginContainer}>
@@ -138,7 +168,8 @@ const LoginPage = () => {
         </div>
       </div>
     </MuiThemeProvider>
-  );
-};
+    );
+  }
+}
 
 export default LoginPage;

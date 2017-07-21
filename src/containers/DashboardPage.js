@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { cyan600, pink600, purple600, orange60, grey400, grey600, white } from 'material-ui/styles/colors';
-import Assessment from 'material-ui/svg-icons/action/assessment';
-import Face from 'material-ui/svg-icons/action/face';
-import ThumbUp from 'material-ui/svg-icons/action/thumb-up';
-import ShoppingCart from 'material-ui/svg-icons/action/shopping-cart';
-import InfoBox from '../components/dashboard/InfoBox';
-import Menu from 'material-ui/Menu';
+// import { cyan600, pink600, purple600, orange60, grey400, grey600, white } from 'material-ui/styles/colors';
+import { cyan600, grey600, white } from 'material-ui/styles/colors';
+
+// import Assessment from 'material-ui/svg-icons/action/assessment';
+// import Face from 'material-ui/svg-icons/action/face';
+// import ThumbUp from 'material-ui/svg-icons/action/thumb-up';
+// import ShoppingCart from 'material-ui/svg-icons/action/shopping-cart';
+// import InfoBox from '../components/dashboard/InfoBox';
+// import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 
 import { typography } from 'material-ui/styles';
@@ -13,6 +15,7 @@ import { typography } from 'material-ui/styles';
 import { List, ListItem, makeSelectable } from 'material-ui/List';
 import Paper from 'material-ui/Paper';
 import Checkbox from 'material-ui/Checkbox';
+import Subheader from 'material-ui/Subheader';
 
 import NewOrders from '../components/dashboard/NewOrders';
 import MonthlySales from '../components/dashboard/MonthlySales';
@@ -20,8 +23,6 @@ import BrowserUsage from '../components/dashboard/BrowserUsage';
 import RecentlyProducts from '../components/dashboard/RecentlyProducts';
 import globalStyles from '../styles';
 import Data from '../data';
-
-import Subheader from 'material-ui/Subheader';
 
 let SelectableList = makeSelectable(List);
 
@@ -35,11 +36,11 @@ function wrapState(ComposedComponent) {
       });
     }
 
-    handleRequestChange = (event, index) => {
+    handleRequestChange(event, index) {
       this.setState({
         selectedIndex: index,
       });
-    };
+    }
 
     render() {
       return (
@@ -79,7 +80,7 @@ const styles = {
 
 const ListExampleSelectable = () => (
   <Paper style={ styles.list }>
-    <Subheader style={styles.subheader}> Bundle Name </Subheader>
+    <Subheader style={styles.subheader}> Sua </Subheader>
     <SelectableList defaultValue={3}>
       <ListItem
         value={1}
