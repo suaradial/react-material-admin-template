@@ -30,15 +30,16 @@ class App extends React.Component {
     };
 
     this.USER_INFO_ENDPOINT = '/api/user/?v=1.0';
+    this.USER_SIGN_OUT_ENDPOINT = '/api/auth/logout/?v=1.0';
+
     this.handleAuthenticationUpdate = this.handleAuthenticationUpdate.bind(this);
-    
+    this.handleSignOut = this.handleSignOut.bind(this);
   }
 
   componentWillMount() {
     this.setState({isLoading: true});
     axios(this.USER_INFO_ENDPOINT).then( response => {
       const userIsLoggedIn = response.data.uid;
-      console.log(userIsLoggedIn);
       if (userIsLoggedIn) this.handleAuthenticationUpdate();
       this.setState({isLoading: false});
     });
@@ -52,6 +53,17 @@ class App extends React.Component {
 
   handleAuthenticationUpdate() {
     this.setState({userIsAuthenticated:true});
+  }
+
+  handleSignOut(){
+    const { cookies } = this.props;
+    const csrftoken = cookies.get('csrftoken');
+
+    // No payload necessary for signout, so we pass in an empty {}
+    axios.post(this.USER_SIGN_OUT_ENDPOINT, {}, { headers: {'X-CSRFToken': csrftoken }}).then( response => {
+      this.setState({userIsAuthenticated:false});      
+      console.log("RES", response);
+    }).catch( res => console.log("RES", res));
   }
 
   handleChangeRequestNavDrawer() {
@@ -82,6 +94,7 @@ class App extends React.Component {
       <MuiThemeProvider muiTheme={ThemeDefault}>
         <div>
             <Header styles={styles.header}
+                  handleSignOut={this.handleSignOut}
                   handleChangeRequestNavDrawer={this.handleChangeRequestNavDrawer.bind(this)}/>
 
             <LeftDrawer navDrawerOpen={navDrawerOpen}

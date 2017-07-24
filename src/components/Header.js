@@ -62,7 +62,7 @@ class Header extends React.Component {
                             anchorOrigin={{horizontal: 'right', vertical: 'top'}}
                   >
                     <MenuItem primaryText="Profile" containerElement={<Link to="/login"/>}/>
-                    <MenuItem primaryText="Sign out" containerElement={<Link to="/login"/>}/>
+                    <MenuItem onClick={this.props.handleSignOut} primaryText="Sign out" containerElement={<Link to="/login"/>} />
                   </IconMenu>
                 </div>
               }
