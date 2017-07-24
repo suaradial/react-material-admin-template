@@ -1,8 +1,9 @@
 import React from 'react';  
 import { Redirect, Route } from 'react-router-dom';
 
-const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => (
-  <Route {...rest} render={props => (
+const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => {
+  console.log("PROPS", isAuthenticated);
+  return (<Route {...rest} render={props => (
       isAuthenticated ? (
       <Component {...props}/>
     ) : (
@@ -11,7 +12,7 @@ const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => (
         state: { from: props.location }
       }}/>
     )
-  )}/>
-);
+  )}/>);
+};
 
 export default PrivateRoute;

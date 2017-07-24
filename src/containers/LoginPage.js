@@ -89,7 +89,6 @@ class LoginPage extends Component {
   }
 
   handleChange() {
-    console.log(this.props);
     this.props.handleAuthenticationUpdate();
   }
 
@@ -98,6 +97,7 @@ class LoginPage extends Component {
     const { cookies } = this.props;
     const csrftoken = cookies.get('csrftoken');
     let payload = { username_or_email: this.state.user.email, password: this.state.user.password };
+
     axios.post('/api/auth/login/?v=1.0', payload, { headers: {'X-CSRFToken': csrftoken }} ).then( (response) => {
       const authSuccessful = response.data.success;
 
@@ -125,7 +125,6 @@ class LoginPage extends Component {
     const { redirectToReferrer } = this.state;
     
     if (redirectToReferrer) {
-      console.log("i'm Redirecting!", from);
       return (<Redirect to={from} />);
     }
 
