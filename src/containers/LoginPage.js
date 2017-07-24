@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import {  Link } from 'react-router-dom';
-
+import { Redirect, Link } from 'react-router-dom';
+import axios from 'axios';
+import {withCookies}  from 'react-cookie';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -12,14 +13,6 @@ import Help from 'material-ui/svg-icons/action/help';
 import TextField from 'material-ui/TextField';
 import ThemeDefault from '../theme-default';
 
-//const { from } = this.props.location.state || { from: { pathname: '/' } }
-    // const { redirectToReferrer } = this.state
-    
-    // if (redirectToReferrer) {
-    //   return (
-    //     <Redirect to={from}/>
-    //   )
-    // }
 const styles = {
     loginContainer: {
       minWidth: 320,
@@ -79,49 +72,84 @@ const styles = {
     },
   };
 
+
 class LoginPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       redirectToReferrer: false,
+      user: {
+        email: '',
+        password: ''
+      }
     };
+    this.login = this.login.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.changeUserCredentials = this.changeUserCredentials.bind(this);
   }
-  
-  login () {
-    // make api call here. 
 
-    // if authenticated:
-    this.setState({ redirectToReferrer: true });
+  handleChange() {
+    console.log(this.props);
+    this.props.handleAuthenticationUpdate();
   }
+
+  login() {
+    // need to prevent default so that React doesn't run login funciton on load
+    const { cookies } = this.props;
+    const csrftoken = cookies.get('csrftoken');
+    let payload = { username_or_email: this.state.user.email, password: this.state.user.password };
+    axios.post('/api/auth/login/?v=1.0', payload, { headers: {'X-CSRFToken': csrftoken }} ).then( (response) => {
+      const authSuccessful = response.data.success;
+
+      if (authSuccessful) {
+        this.handleChange();
+        this.setState({ redirectToReferrer: true });
+      }
+
+    });
+  }
+
+  changeUserCredentials(event) {
+    const field = event.target.name;
+    const user = this.state.user;
+    user[field] = event.target.value;
+
+    this.setState({
+      user
+    });
+  }
+
 
   render() {
+    const { from } = this.props.location.state || { from: { pathname: '/' } };
+    const { redirectToReferrer } = this.state;
+    
+    if (redirectToReferrer) {
+      console.log("i'm Redirecting!", from);
+      return (<Redirect to={from} />);
+    }
+
     return(
-    // const { from } = this.props.location.state || { from: { pathname: '/' } };
-    // const { redirectToReferrer } = this.state;
-    
-    // if (redirectToReferrer) {
-    //   <Redirect to={from} />
-    // }
-    
     <MuiThemeProvider muiTheme={ThemeDefault}>
       <div>
         <div style={styles.loginContainer}>
-
           <Paper style={styles.paper}>
-
             <form>
               <TextField
                 hintText="E-mail"
                 floatingLabelText="E-mail"
                 fullWidth={true}
+                name="email"
+                onChange={this.changeUserCredentials}
               />
               <TextField
                 hintText="Password"
                 floatingLabelText="Password"
                 fullWidth={true}
                 type="password"
+                name="password"
+                onChange={this.changeUserCredentials}                
               />
-
               <div>
                 <Checkbox
                   label="Remember me"
@@ -129,12 +157,11 @@ class LoginPage extends Component {
                   labelStyle={styles.checkRemember.labelStyle}
                   iconStyle={styles.checkRemember.iconStyle}
                 />
-
-                <Link to="/">
-                  <RaisedButton label="Login"
-                                primary={true}
-                                style={styles.loginBtn}/>
-                </Link>
+                <RaisedButton label="Login"
+                              primary={true}
+                              style={styles.loginBtn}
+                              onClick={this.login}
+                                />
               </div>
             </form>
           </Paper>
@@ -172,4 +199,4 @@ class LoginPage extends Component {
   }
 }
 
-export default LoginPage;
+export default withCookies(LoginPage);

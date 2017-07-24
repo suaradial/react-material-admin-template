@@ -3,10 +3,10 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
+import { CookiesProvider } from 'react-cookie';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import App from './containers/App';
 //import DashboardPage from './containers/DashboardPage';
-
 import './styles.scss';
 
 require('./favicon.ico');
@@ -20,8 +20,10 @@ require('./favicon.ico');
 injectTapEventPlugin();
 
 render(
-    <BrowserRouter >
-      <App />
-    </BrowserRouter >
+    <CookiesProvider>
+      <BrowserRouter >
+        <App />
+      </BrowserRouter >
+    </CookiesProvider>
     , document.getElementById('app')
 );

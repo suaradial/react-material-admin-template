@@ -1,5 +1,11 @@
 import React from 'react';
 
+import App from './containers/App';
+import NotFoundPage from './containers/NotFoundPage';
+import LoginPage from './containers/LoginPage';
+import FormPage from './containers/FormPage';
+import TablePage from './containers/TablePage';
+import Dashboard from './containers/DashboardPage';
 //import NeedsAuthentication from './containers/AuthenticationContainer';
 
 export default (
