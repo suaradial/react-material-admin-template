@@ -1,23 +1,22 @@
 import React from 'react';
+import { Route, Switch } from 'react-router-dom';
 
-import App from './containers/App';
 import NotFoundPage from './containers/NotFoundPage';
 import LoginPage from './containers/LoginPage';
-import FormPage from './containers/FormPage';
+import ResetPasswordPage from './containers/ResetPasswordPage';
 import TablePage from './containers/TablePage';
 import Dashboard from './containers/DashboardPage';
-//import NeedsAuthentication from './containers/AuthenticationContainer';
+import PrivateRoute from './components/AuthenticationContainer';
 
-export default (
+const Routes = (props) => (
   <Switch>
-    <Route path="login" component={LoginPage}/>
-    {
-      // We should abstract this second switch out into it's own componen
-    }
-    <Route exact path="/" component={App}/>
-    <Route exact path="/dashboard" component={Dashboard}/>
-    <Route path="/form" component={FormPage}/>
-    <Route path="/table" component={TablePage}/>
-    <Route path="*" component={NotFoundPage}/>
+    <Route path="/login" render={routeProps => <LoginPage {...routeProps} handleAuthenticationUpdate={props.handleAuthenticationUpdate}/>}/>
+    <PrivateRoute exact path="/" component={Dashboard} isAuthenticated={props.userIsAuthenticated} />
+    <PrivateRoute exact path="/dashboard" component={Dashboard} isAuthenticated={props.userIsAuthenticated} />
+    <PrivateRoute path="/form" component={ResetPasswordPage} isAuthenticated={props.userIsAuthenticated} />
+    <PrivateRoute path="/table" component={TablePage} isAuthenticated={props.userIsAuthenticated} />
+    <PrivateRoute path="*" component={NotFoundPage} isAuthenticated={props.userIsAuthenticated} />
   </Switch>
-);
+)
+
+export default Routes;

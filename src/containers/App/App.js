@@ -2,27 +2,22 @@ import React, { PropTypes } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import withWidth, {LARGE, SMALL} from 'material-ui/utils/withWidth';
 import CircularProgress from 'material-ui/CircularProgress';
-import { Route, Switch } from 'react-router-dom';
+
 import {withCookies}  from 'react-cookie';
 import axios from 'axios';
-import PrivateRoute from '../components/AuthenticationContainer';
 
-
-import NotFoundPage from './NotFoundPage';
-import LoginPage from './LoginPage';
-import FormPage from './FormPage';
-import TablePage from './TablePage';
-import Dashboard from './DashboardPage';
-import Header from '../components/Header';
-import LeftDrawer from '../components/LeftDrawer';
-import ThemeDefault from '../theme-default';
-import Data from '../data';
+import Routes from '../../Routes';
+import Header from '../../components/Header';
+import LeftDrawer from '../../components/LeftDrawer';
+import ThemeDefault from '../../theme-default';
+import Data from '../../data';
 
 
 class App extends React.Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
       navDrawerOpen: false,
       userIsAuthenticated: false,
@@ -38,11 +33,17 @@ class App extends React.Component {
 
   componentWillMount() {
     this.setState({isLoading: true});
-    axios(this.USER_INFO_ENDPOINT).then( response => {
-      const userIsLoggedIn = response.data.uid;
-      if (userIsLoggedIn) this.handleAuthenticationUpdate();
+
+    axios(this.USER_INFO_ENDPOINT).then( res => {
+      const userLoggedIn = res.data.uid;
+      if (userLoggedIn) this.handleAuthenticationUpdate();
       this.setState({isLoading: false});
-    });
+    }).catch( 
+
+      // If user isn't logged in, remove the loadig spinner.
+      // Application will redirect to Login Page
+      () => this.setState({isLoading: false})
+    );
   }
 
   componentWillReceiveProps(nextProps) {
@@ -60,10 +61,12 @@ class App extends React.Component {
     const csrftoken = cookies.get('csrftoken');
 
     // No payload necessary for signout, so we pass in an empty {}
-    axios.post(this.USER_SIGN_OUT_ENDPOINT, {}, { headers: {'X-CSRFToken': csrftoken }}).then( response => {
-      this.setState({userIsAuthenticated:false});      
-      console.log("RES", response);
-    }).catch( res => console.log("RES", res));
+    axios.post(this.USER_SIGN_OUT_ENDPOINT, {}, { headers: {'X-CSRFToken': csrftoken }}).then( 
+      () => {
+        this.setState({userIsAuthenticated:false});      
+    }).catch( 
+      res => console.log("HANLE SOME ERROR", res)
+    );
   }
 
   handleChangeRequestNavDrawer() {
@@ -76,6 +79,7 @@ class App extends React.Component {
     let { navDrawerOpen } = this.state;
     const paddingLeftDrawerOpen = 236;
 
+    // We need to extract out to separate file but it uses state. Add dynamic style function?
     const styles = {
       header: {
         paddingLeft: navDrawerOpen ? paddingLeftDrawerOpen : 0
@@ -93,28 +97,28 @@ class App extends React.Component {
     return (
       <MuiThemeProvider muiTheme={ThemeDefault}>
         <div>
-            <Header styles={styles.header}
-                  handleSignOut={this.handleSignOut}
-                  handleChangeRequestNavDrawer={this.handleChangeRequestNavDrawer.bind(this)}/>
+            <Header
+              styles={styles.header}
+              handleSignOut={this.handleSignOut}
+              handleChangeRequestNavDrawer={this.handleChangeRequestNavDrawer.bind(this)}
+            />
 
             <LeftDrawer navDrawerOpen={navDrawerOpen}
-                        menus={Data.menus}
-                        username="User Admin"/>
+              menus={Data.menus}
+              username="User Admin"
+            />
 
             <div style={styles.container}>
-            { (this.state.isLoading && 
-              <div style={styles.loader}>
-                <CircularProgress  size={200} thickness={15}/>
-              </div>) 
+            { 
+              (this.state.isLoading && 
+                <div style={styles.loader}>
+                  <CircularProgress  size={200} thickness={15}/>
+                </div>) 
               ||
-              <Switch>
-                <Route path="/login" render={routeProps => <LoginPage {...routeProps} handleAuthenticationUpdate={this.handleAuthenticationUpdate}/>}/>
-                <PrivateRoute exact path="/" component={Dashboard} isAuthenticated={this.state.userIsAuthenticated} />
-                <PrivateRoute exact path="/dashboard" component={Dashboard} isAuthenticated={this.state.userIsAuthenticated} />
-                <PrivateRoute path="/form" component={FormPage} isAuthenticated={this.state.userIsAuthenticated} />
-                <PrivateRoute path="/table" component={TablePage} isAuthenticated={this.state.userIsAuthenticated} />
-                <PrivateRoute path="*" component={NotFoundPage} isAuthenticated={this.state.userIsAuthenticated} />
-              </Switch>
+              <Routes 
+                userIsAuthenticated={this.state.userIsAuthenticated}
+                handleAuthenticationUpdate={this.handleAuthenticationUpdate}
+              />
             }
 
             </div>

@@ -1,28 +1,18 @@
 import React, { Component } from 'react';
-// import { cyan600, pink600, purple600, orange60, grey400, grey600, white } from 'material-ui/styles/colors';
 import { cyan600, grey600, white } from 'material-ui/styles/colors';
-
-// import Assessment from 'material-ui/svg-icons/action/assessment';
-// import Face from 'material-ui/svg-icons/action/face';
-// import ThumbUp from 'material-ui/svg-icons/action/thumb-up';
-// import ShoppingCart from 'material-ui/svg-icons/action/shopping-cart';
-// import InfoBox from '../components/dashboard/InfoBox';
-// import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
-
 import { typography } from 'material-ui/styles';
-
 import { List, ListItem, makeSelectable } from 'material-ui/List';
 import Paper from 'material-ui/Paper';
 import Checkbox from 'material-ui/Checkbox';
 import Subheader from 'material-ui/Subheader';
 
-import NewOrders from '../components/dashboard/NewOrders';
-import MonthlySales from '../components/dashboard/MonthlySales';
-import BrowserUsage from '../components/dashboard/BrowserUsage';
-import RecentlyProducts from '../components/dashboard/RecentlyProducts';
-import globalStyles from '../styles';
-import Data from '../data';
+import NewOrders from '../../components/dashboard/NewOrders';
+import MonthlySales from '../../components/dashboard/MonthlySales';
+import BrowserUsage from '../../components/dashboard/BrowserUsage';
+import RecentlyProducts from '../../components/dashboard/RecentlyProducts';
+import globalStyles from '../../styles';
+import Data from '../../data';
 
 let SelectableList = makeSelectable(List);
 
@@ -151,29 +141,7 @@ const DashboardPage = () => {
             <MenuItem primaryText="Flights" />
             <MenuItem primaryText="Apps" />
           </ListExampleSelectable>
-            {/* <InfoBox Icon={ShoppingCart}
-                    color={pink600}
-                    title="Total Profit"
-                    value="1500k" 
-          /> */}
         </div>
-
-
-        {/* <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3 m-b-15 ">
-          <InfoBox Icon={ThumbUp}
-                   color={cyan600}
-                   title="Likes"
-                   value="4231"
-          />
-        </div> */}
-
-        {/* <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3 m-b-15 ">
-          <InfoBox Icon={Assessment}
-                   color={purple600}
-                   title="Sales"
-                   value="460"
-          />
-        </div> */}
 
         <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3     col-md-offset-1 col-lg-offset-1 m-b-15 ">
            <ListExampleSelectable /> 
