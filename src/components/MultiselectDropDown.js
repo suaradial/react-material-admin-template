@@ -16,16 +16,8 @@ export default class SelectFieldExampleMultiSelect extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(event, index, newSelectedValue)  {
-    if (this.state.selectedValues.includes(newSelectedValue)){
-      const updatedSelectedValues = this.state.selectedValues.filter( value => value !== newSelectedValue);
-      
-      this.setState({selectedValues: updatedSelectedValues});
-    } else {
-      this.setState({ 
-        selectedValues: [...this.state.selectedValues , newSelectedValue]
-      }); 
-    }
+  handleChange(event, index, updatedSelectedValues)  {
+    this.setState({selectedValues: updatedSelectedValues});
   }
 
   menuItems(selectedValues) {
