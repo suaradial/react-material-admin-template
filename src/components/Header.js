@@ -51,8 +51,8 @@ class Header extends React.Component {
                             targetOrigin={{horizontal: 'right', vertical: 'top'}}
                             anchorOrigin={{horizontal: 'right', vertical: 'top'}}
                   >
-                    <MenuItem key={1} primaryText="CMS BPCI"/>
-                    <MenuItem key={2} primaryText="Tufts Medicare Preferred"/>
+                    <MenuItem key={1} primaryText="CMS BPCI" value="CMS BPCI" />
+                    <MenuItem key={2} primaryText="Tufts Medicare Preferred" value="Tufts" />
                   </IconMenu>
                   <IconMenu color={white}
                             iconButtonElement={

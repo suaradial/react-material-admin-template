@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import withWidth, {LARGE, SMALL} from 'material-ui/utils/withWidth';
 import CircularProgress from 'material-ui/CircularProgress';
@@ -13,7 +13,7 @@ import ThemeDefault from '../../theme-default';
 import Data from '../../data';
 
 
-class App extends React.Component {
+class App extends Component {
 
   constructor(props) {
     super(props);
@@ -21,7 +21,8 @@ class App extends React.Component {
     this.state = {
       navDrawerOpen: false,
       userIsAuthenticated: false,
-      isLoading: false
+      isLoading: false,
+      userData: {}
     };
 
     this.USER_INFO_ENDPOINT = '/api/user/?v=1.0';
@@ -35,6 +36,8 @@ class App extends React.Component {
     this.setState({isLoading: true});
 
     axios(this.USER_INFO_ENDPOINT).then( res => {
+      this.setState({userData: res.data});
+
       const userLoggedIn = res.data.uid;
       if (userLoggedIn) this.handleAuthenticationUpdate();
       this.setState({isLoading: false});
@@ -105,7 +108,7 @@ class App extends React.Component {
 
             <LeftDrawer navDrawerOpen={navDrawerOpen}
               menus={Data.menus}
-              username="User Admin"
+              username={this.state.userData.username || ''}
             />
 
             <div style={styles.container}>

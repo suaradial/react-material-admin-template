@@ -29,7 +29,6 @@ const LoginForm = (props) =>{
                   fullWidth={true}
                   name="email"
                   onChange={props.changeUserCredentials}
-                  isRequired
                 />
                 <TextField
                   hintText="Password"

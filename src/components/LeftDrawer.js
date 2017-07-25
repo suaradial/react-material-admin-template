@@ -39,6 +39,7 @@ const LeftDrawer = (props) => {
       },
       span: {
         paddingTop: 12,
+        paddingLeft: 20,
         display: 'inline',
         color: 'white',
         fontWeight: 300,
